@@ -1,5 +1,5 @@
 /* ======================================================================== */
-/* RelayMail: prod_ver.sql Version: 0.1.1.3                                 */
+/* RelayMail: prod_ver.sql Version: 0.1.1.4                                 */
 /*                                                                          */
 /* Copyright 2017-2018 Aleksei Ilin & Igor Ilin                             */
 /*                                                                          */
@@ -33,7 +33,7 @@ returns
   (Result TString16)
 as
 begin
-  Result = '0.1.1.3';
+  Result = '0.1.1.4';
   suspend;
 end^
 /*-----------------------------------------------------------------------------------------------*/

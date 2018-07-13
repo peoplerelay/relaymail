@@ -1,5 +1,5 @@
 /* ======================================================================== */
-/* RelayMail: dbext.sql Version: 0.1.1.3                                    */
+/* RelayMail: dbext.sql Version: 0.1.1.4                                    */
 /*                                                                          */
 /* Copyright 2017-2018 Aleksei Ilin & Igor Ilin                             */
 /*                                                                          */
@@ -69,12 +69,12 @@ as
 */
   declare Result SmallInt;
   declare ErrState TErrState;
-  declare SelfHash TChHash;
+  declare BHash TChHash;
   declare Alias TNdAlias;
 
   declare Nonce TNonce;
 
-  declare LoadSig TSig;
+  declare BSig TSig;
   declare Address TAddress;
   declare RandKey TRndPwd;
   declare SndClue TSig;
@@ -93,7 +93,7 @@ begin
   MailTime = UTCTime();
 
   select Alias,PubKey,PvtKey from P_TParams into :Alias,:SndKey,:PvtKey; /* Sender */
-  select PubKey from P_TNode where NodeId = :RecipientId into :RcpKey; /* Recipient */
+  select PubKey from P_TPeer where NodeId = :RecipientId into :RcpKey; /* Recipient */
   if (Snd is null or Snd = '') then Sender = Alias; else Sender = Snd;
 
   if (SndId is null or SndId = '')
@@ -125,17 +125,17 @@ begin
     coalesce(Body,'0') || '-' ||
     coalesce(Data,'0');
     
-  execute procedure P_FindHash(A_Data) returning_values Nonce,SelfHash;
+  execute procedure P_FindHash(A_Data) returning_values Nonce,BHash;
 
-  execute procedure P_BlockSig(SelfHash,PvtKey) returning_values LoadSig;
+  execute procedure P_BlockSig(BHash,PvtKey) returning_values BSig;
 
   execute procedure P_AddBlock(
-    :SelfHash,
+    :BHash,
     :BlockId,
     :Address,
     :SenderId,
     :Nonce,
-    :LoadSig,
+    :BSig,
     :SndKey,
     :MailTime,
     :Sender,
@@ -612,7 +612,7 @@ as
     NodeId,
     Alias
   from
-    P_TNode
+    P_TPeer
   where Enabled = 1
     and Status >= 0;
 /*-----------------------------------------------------------------------------------------------*/
@@ -638,7 +638,7 @@ as
     where SenderId = (select DefSenderId from P_TParams);
 /*-----------------------------------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------------------------------*/
-grant select on P_TNode to procedure Mail_Send;
+grant select on P_TPeer to procedure Mail_Send;
 grant select on P_TParams to procedure Mail_Send;
 grant execute on procedure P_GenPwd to procedure Mail_Send;
 grant execute on procedure P_DefAddr to procedure Mail_Send;

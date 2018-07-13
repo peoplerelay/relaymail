@@ -1,6 +1,6 @@
 #!/bin/bash
 # ======================================================================== #
-# RelayMail: build_pr.sh Version: 0.1.1.3                                  #
+# RelayMail: build_pr.sh Version: 0.1.1.4                                  #
 #                                                                          #
 # Copyright 2017-2018 Aleksei Ilin & Igor Ilin                             #
 #                                                                          #

@@ -1,5 +1,5 @@
 /* ======================================================================== */
-/* RelayMail: set_params.sql Version: 0.1.1.3                               */
+/* RelayMail: set_params.sql Version: 0.1.1.4                               */
 /*                                                                          */
 /* Copyright 2017-2018 Aleksei Ilin & Igor Ilin                             */
 /*                                                                          */

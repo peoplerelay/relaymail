@@ -1,6 +1,6 @@
 @echo off
 Rem ======================================================================== Rem
-Rem RelayMail: build.bat Version: 0.1.1.3                                    Rem
+Rem RelayMail: build.bat Version: 0.1.1.4                                    Rem
 Rem                                                                          Rem
 Rem Copyright 2017-2018 Aleksei Ilin & Igor Ilin                             Rem
 Rem                                                                          Rem
